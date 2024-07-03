@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">abcde-android</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="one">aa</string>
+    <string name="two">bb\n</string>
+    <string name="three">ccc\n</string>
+    <string name="me">我</string>
+</resources>

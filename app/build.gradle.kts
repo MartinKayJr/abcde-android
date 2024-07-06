@@ -3,6 +3,8 @@ import java.util.UUID
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("build-logic.android.application")
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.kotlin.android)
 //    alias(libs.plugins.jetbrains.kotlin.android)
 }
 
@@ -66,8 +68,13 @@ android {
         compose = true
         buildConfig = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
 
-
+//    composeOptions {
+//        kotlinCompilerExtensionVersion = "1.5.2"
+//    }
 }
 
 dependencies {
@@ -84,6 +91,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.google.accompanist)
+    implementation(libs.abcde.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

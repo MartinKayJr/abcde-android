@@ -1,18 +1,23 @@
 package cn.martinkay.abcde.ui.theme
-import android.app.Activity
+
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.Typography
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import cn.martinkay.abcde.R
+import me.yricky.oh.abcd.cfm.AbcClass
+import me.yricky.oh.abcd.cfm.AbcField
+import me.yricky.oh.abcd.cfm.AbcMethod
+import me.yricky.oh.abcd.cfm.ClassItem
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -253,6 +258,97 @@ data class ColorFamily(
 val unspecified_scheme = ColorFamily(
     Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
 )
+
+@Composable
+fun AbcField.icon(): Painter {
+    return Icons.field()
+}
+
+@Composable
+fun AbcMethod.icon(): Painter {
+    return Icons.method()
+}
+
+object Icons {
+    @Composable
+    fun listFiles() = if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_list_files_dark)
+    } else {
+        painterResource(R.drawable.ic_list_files)
+    }
+
+    @Composable
+    fun close() = if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_close_small_hovered_dark)
+    } else {
+        painterResource(R.drawable.ic_close_small_hovered)
+    }
+
+    @Composable
+    fun clazz() = if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_clazz_dark)
+    } else {
+        painterResource(R.drawable.ic_clazz)
+    }
+
+    @Composable
+    fun field() = if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_field_dark)
+    } else {
+        painterResource(R.drawable.ic_field)
+    }
+
+    @Composable
+    fun method() = if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_method_dark)
+    } else {
+        painterResource(R.drawable.ic_method)
+    }
+
+    @Composable
+    fun homeFolder() = if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_home_folder_dark)
+    } else {
+        painterResource(R.drawable.ic_home_folder)
+    }
+}
+
+
+@Composable
+fun ClassItem.icon(): Painter {
+    return if (this is AbcClass) {
+        when {
+            accessFlags.isEnum -> if (isSystemInDarkTheme()) {
+                painterResource(R.drawable.ic_enum_dark)
+            } else {
+                painterResource(R.drawable.ic_enum)
+            }
+
+            accessFlags.isInterface -> if (isSystemInDarkTheme()) {
+                painterResource(R.drawable.ic_interface_dark)
+            } else {
+                painterResource(R.drawable.ic_interface)
+            }
+
+            accessFlags.isAnnotation -> if (isSystemInDarkTheme()) {
+                painterResource(R.drawable.ic_annotation_dark)
+            } else {
+                painterResource(R.drawable.ic_annotation)
+            }
+
+            accessFlags.isAbstract -> if (isSystemInDarkTheme()) {
+                painterResource(R.drawable.ic_class_abstract_dark)
+            } else {
+                painterResource(R.drawable.ic_class_abstract)
+            }
+
+            else -> Icons.clazz()
+        }
+    } else {
+        Icons.clazz()
+    }
+}
+
 
 @Composable
 fun AbcdeTheme(

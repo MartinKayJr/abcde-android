@@ -21,6 +21,7 @@ dependencyResolutionManagement {
 //    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
+        mavenLocal()
         // 下载不全需要在这里切换顺序 aliyun下载不了的就换mavenCentral
         mavenCentral()
         maven("https://maven.aliyun.com/repository/google")

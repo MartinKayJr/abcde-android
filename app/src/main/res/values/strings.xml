@@ -5,4 +5,5 @@
     <string name="two">bb\n</string>
     <string name="three">ccc\n</string>
     <string name="me">我</string>
+    <string name="title_activity_permission">PermissionActivity</string>
 </resources>

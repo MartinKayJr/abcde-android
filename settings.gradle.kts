@@ -55,6 +55,7 @@ develocity {
 
 rootProject.name = "abcde-android"
 include(
-    ":app"
+    ":app",
+    ":libs:fileSelector"
 //    ":libs:abcde",
 )

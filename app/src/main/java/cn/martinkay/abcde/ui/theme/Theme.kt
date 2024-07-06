@@ -10,6 +10,8 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -292,6 +294,27 @@ object Icons {
     }
 
     @Composable
+    fun info() = if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_info_dark)
+    } else {
+        painterResource(R.drawable.ic_info)
+    }
+
+    @Composable
+    fun search()= if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_search_dark)
+    } else {
+        painterResource(R.drawable.ic_search)
+    }
+
+    @Composable
+    fun pkg() = if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_package_dark)
+    } else {
+        painterResource(R.drawable.ic_package)
+    }
+
+    @Composable
     fun field() = if (isSystemInDarkTheme()) {
         painterResource(R.drawable.ic_field_dark)
     } else {
@@ -357,20 +380,23 @@ fun AbcdeTheme(
     dynamicColor: Boolean = false,
     content: @Composable() () -> Unit
 ) {
-  val colorScheme = when {
-      dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-          val context = LocalContext.current
-          if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-      }
-      
-      darkTheme -> darkScheme
-      else -> lightScheme
-  }
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
 
-  MaterialTheme(
-    colorScheme = colorScheme,
-    typography = AppTypography,
-    content = content
-  )
+        darkTheme -> darkScheme
+        else -> lightScheme
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = AppTypography,
+        content = content
+    )
 }
 
+val grayColorFilter = ColorFilter.colorMatrix(ColorMatrix().apply {
+    setToSaturation(0f)
+})

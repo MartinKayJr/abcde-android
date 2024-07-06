@@ -5,7 +5,6 @@ plugins {
     id("build-logic.android.application")
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.jetbrains.kotlin.android)
-//    alias(libs.plugins.jetbrains.kotlin.android)
 }
 
 val currentBuildUuid = UUID.randomUUID().toString()
@@ -14,7 +13,6 @@ println("Current build ID is $currentBuildUuid")
 
 android {
     namespace = "cn.martinkay.abcde"
-    compileSdk = 34
 
     defaultConfig {
         applicationId = "cn.martinkay.abcde"
@@ -91,6 +89,10 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
+//    implementation(libs.androidx.compose.foundation)
+//    implementation(libs.androidx.compose.foundation.layout)
+//    implementation(libs.androidx.compose.foundation.desktop)
+
     implementation(libs.google.accompanist)
     implementation(libs.abcde.core)
     testImplementation(libs.junit)
@@ -100,5 +102,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(project(":libs:fileSelector"))
+
 
 }

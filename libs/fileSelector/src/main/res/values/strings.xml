@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_selected_directory_absent">The directory  is absent or not a directory</string>
+    <string name="text_selected_folder_empty">%s folder is empty!</string>
+    <string name="text_confirm">confirm</string>
+    <string name="text_file">file</string>
+    <string name="text_selected_file_or_folder_empty">This directory does not have the files or folders you want!</string>
+</resources>

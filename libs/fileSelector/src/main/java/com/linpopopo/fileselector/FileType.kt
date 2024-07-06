@@ -1,0 +1,117 @@
+package com.linpopopo.fileselector
+
+
+enum class FileType(
+    val icon: Int,
+    vararg val extensions: String
+) {
+    DIRECTORY(R.drawable.ic_folder),
+    DOCUMENT(R.drawable.ic_document, "txt"),
+    CERTIFICATE(R.drawable.ic_certificate, "cer", "der", "pfx", "p12", "arm", "pem"),
+    DRAWING(
+        R.drawable.ic_drawing,
+        "ai",
+        "cdr",
+        "dfx",
+        "eps",
+        "svg",
+        "stl",
+        "wmf",
+        "emf",
+        "art",
+        "xar"
+    ),
+    EXCEL(
+        R.drawable.ic_excel,
+        "xls",
+        "xlk",
+        "xlsb",
+        "xlsm",
+        "xlsx",
+        "xlr",
+        "xltm",
+        "xlw",
+        "numbers",
+        "ods",
+        "ots"
+    ),
+    IMAGE(
+        R.drawable.ic_image,
+        "bmp",
+        "gif",
+        "ico",
+        "jpeg",
+        "jpg",
+        "pcx",
+        "png",
+        "psd",
+        "tga",
+        "tiff",
+        "tif",
+        "xcf"
+    ),
+    MUSIC(
+        R.drawable.ic_music,
+        "aiff",
+        "aif",
+        "wav",
+        "flac",
+        "m4a",
+        "wma",
+        "amr",
+        "mp2",
+        "mp3",
+        "wma",
+        "aac",
+        "mid",
+        "m3u"
+    ),
+    VIDEO(
+        R.drawable.ic_video,
+        "avi",
+        "mov",
+        "wmv",
+        "mkv",
+        "3gp",
+        "f4v",
+        "flv",
+        "mp4",
+        "mpeg",
+        "webm"
+    ),
+    PDF(R.drawable.ic_pdf, "pdf"),
+    POWER_POINT(
+        R.drawable.ic_powerpoint,
+        "pptx",
+        "keynote",
+        "ppt",
+        "pps",
+        "pot",
+        "odp",
+        "otp"
+    ),
+    WORD(R.drawable.ic_word, "doc", "docm", "docx", "dot", "mcw", "rtf", "pages", "odt", "ott"),
+    ARCHIVE(
+        R.drawable.ic_zip,
+        "cab",
+        "7z",
+        "alz",
+        "arj",
+        "bzip2",
+        "bz2",
+        "dmg",
+        "gzip",
+        "gz",
+        "jar",
+        "lz",
+        "lzip",
+        "lzma",
+        "zip",
+        "rar",
+        "tar",
+        "tgz"
+    ),
+    APK(R.drawable.ic_apk, "apk"),
+    EXE(R.drawable.ic_exe, "exe"),
+    UNKNOWN(R.drawable.ic_unknown);
+}

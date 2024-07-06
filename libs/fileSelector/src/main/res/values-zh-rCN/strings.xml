@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_selected_directory_absent">这个目录不存在或者不是一个目录</string>
+    <string name="text_selected_folder_empty">%s文件夹为空</string>
+    <string name="text_confirm">确定</string>
+    <string name="text_file">文件</string>
+    <string name="text_selected_file_or_folder_empty">这个目录没有你想要的文件或文件夹</string>
+</resources>

@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontFamily
@@ -59,9 +60,11 @@ fun ClassViewPage(
         } to composeContent {
             Column(Modifier.fillMaxSize()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Image(clazz.icon(), null, modifier = Modifier
-                        .padding(8.dp)
-                        .size(24.dp))
+                    Image(
+                        clazz.icon(), null, modifier = Modifier
+                            .padding(8.dp)
+                            .size(24.dp)
+                    )
                     Text(clazz.name, style = MaterialTheme.typography.titleLarge)
                 }
                 var fieldFilter by remember {
@@ -103,7 +106,6 @@ fun ClassViewPage(
                             modifier = Modifier
                                 .clearFocusWhenEnter(focus)
                                 .fillMaxWidth()
-                                .background(MaterialTheme.colorScheme.secondaryContainer)
                         ) {
                             Image(it.icon(), null)
                             if (it.accessFlags.isEnum) {
@@ -116,13 +118,11 @@ fun ClassViewPage(
                             }
                             SelectionContainer {
                                 Text(
-                                    it.defineStr(),
+                                    text = it.defineStr(),
                                     maxLines = 1,
+                                    lineHeight = 24.sp,
                                     overflow = TextOverflow.Ellipsis,
                                     fontFamily = FontFamily.Monospace,
-                                    lineHeight = 0.sp,
-                                    // 白色
-                                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                                 )
                             }
                         }
@@ -159,12 +159,11 @@ fun ClassViewPage(
                                 Image(Icons.watch(), null)
                             }
                             Text(
-                                it.defineStr(),
+                                text = it.defineStr(),
                                 maxLines = 1,
+                                lineHeight = 24.sp,
                                 overflow = TextOverflow.Ellipsis,
                                 fontFamily = FontFamily.Monospace,
-                                lineHeight = 0.sp,
-                                modifier = Modifier.weight(1f)
                             )
                         }
                     }

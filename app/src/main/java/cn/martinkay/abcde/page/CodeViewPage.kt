@@ -16,8 +16,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.DisableSelection
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RichTooltip
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -67,7 +70,7 @@ val codeStyle
     )
 
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun CodeViewPage(modifier: Modifier, appState: AppState, method: AbcMethod, code: Code?) {
     VerticalTabAndContent(modifier, listOfNotNull(
@@ -122,10 +125,10 @@ fun CodeViewPage(modifier: Modifier, appState: AppState, method: AbcMethod, code
                             )
                             .padding(8.dp)
                     ) {
-//                        FixedSelectionContainer {
                         var tryBlock by remember {
                             mutableStateOf<TryBlock?>(null)
                         }
+                        val tooltipState = remember { mutableStateOf(false) }
                         LazyColumnWithScrollBar {
                             item {
                                 Text(method.defineStr(true), style = codeStyle)
@@ -141,112 +144,77 @@ fun CodeViewPage(modifier: Modifier, appState: AppState, method: AbcMethod, code
                                         }
                                         Text(line, style = codeStyle)
                                     }
-//                                    DisableSelection {
-                                        val tb = remember(item) { item.tryBlocks }
-//                                        ContextMenuArea(
-//                                            items = {
-//                                                buildList<ContextMenuItem> {
-//                                                    if (tryBlock != null) {
-//                                                        add(ContextMenuItem("隐藏行高亮") {
-//                                                            tryBlock = null
-//                                                        })
-//                                                    }
-//                                                    item.asm
-//                                                    it.tryBlocks.forEach {
-//                                                        add(
-//                                                            ContextMenuItem(
-//                                                                "高亮 TryBlock[0x${
-//                                                                    it.startPc.toString(
-//                                                                        16
-//                                                                    )
-//                                                                },0x${
-//                                                                    (it.startPc + it.length).toString(
-//                                                                        16
-//                                                                    )
-//                                                                }]"
-//                                                            ) {
-//                                                                tryBlock = it
-//                                                            }
-//                                                        )
-//                                                    }
-//                                                    item.calledMethods.forEach {
-//                                                        add(ContextMenuItem("跳转到${it.name}") {
-//                                                            appState.openCode(it)
-//                                                        })
-//                                                    }
-//                                                }
-//                                            }
-//                                        ) {
-                                            Text(
-                                                String.format("%04X ", item.codeOffset),
-                                                style = codeStyle.copy(color = commentColor),
-                                                modifier = with(Modifier) {
-                                                    val density = LocalDensity.current
-                                                    if (tryBlock != null) {
-                                                        drawBehind {
-                                                            if (tb.contains(tryBlock)) {
-                                                                drawRect(
-                                                                    Color.Yellow,
-                                                                    size = Size(
-                                                                        density.density * 2,
-                                                                        size.height
-                                                                    )
-                                                                )
-                                                            }
-                                                        }
-                                                    } else this
-                                                }.let { m ->
-                                                    if (tryBlock?.catchBlocks?.find { item.codeOffset in (it.handlerPc until (it.handlerPc + it.codeSize)) } != null) {
-                                                        m.background(MaterialTheme.colorScheme.errorContainer)
-                                                    } else {
-                                                        m
+                                    val tb = remember(item) { item.tryBlocks }
+                                    Text(
+                                        String.format("%04X ", item.codeOffset),
+                                        style = codeStyle.copy(color = commentColor),
+                                        modifier = with(Modifier) {
+                                            val density = LocalDensity.current
+                                            if (tryBlock != null) {
+                                                drawBehind {
+                                                    if (tb.contains(tryBlock)) {
+                                                        drawRect(
+                                                            Color.Yellow,
+                                                            size = Size(
+                                                                density.density * 2,
+                                                                size.height
+                                                            )
+                                                        )
                                                     }
                                                 }
-                                            )
-//                                        }
-//                                    }
-//                                    TooltipArea(tooltip = {
-//                                        DisableSelection {
-//                                            Surface(
-//                                                shape = MaterialTheme.shapes.medium,
-//                                                color = MaterialTheme.colorScheme.primaryContainer
-//                                            ) {
-//                                                Column(modifier = Modifier.padding(8.dp)) {
-//                                                    Text(
-//                                                        item.ins.instruction.sig,
-//                                                        style = codeStyle
-//                                                    )
-//                                                    if (item.ins.instruction.properties != null) {
-//                                                        Text(
-//                                                            "prop:${item.ins.instruction.properties}",
-//                                                            fontSize = MaterialTheme.typography.bodyMedium.fontSize
-//                                                        )
-//                                                    }
-//                                                    Text(
-//                                                        "组:${item.ins.group.title}",
-//                                                        fontSize = MaterialTheme.typography.bodyMedium.fontSize
-//                                                    )
-//                                                    Text(
-//                                                        "组描述:${item.ins.group.description.trim()}",
-//                                                        fontSize = MaterialTheme.typography.bodyMedium.fontSize
-//                                                    )
-//                                                }
-//                                            }
-//                                        }
-//                                    }, modifier = Modifier.fillMaxSize()) {
-                                        Text(
-                                            text = asmString[item]!!,
-                                            style = codeStyle,
-                                            modifier = Modifier.fillMaxWidth()
-                                        )
-                                        Text("\n", maxLines = 1, style = codeStyle)
-//                                    }
+                                            } else this
+                                        }.let { m ->
+                                            if (tryBlock?.catchBlocks?.find { item.codeOffset in (it.handlerPc until (it.handlerPc + it.codeSize)) } != null) {
+                                                m.background(MaterialTheme.colorScheme.errorContainer)
+                                            } else {
+                                                m
+                                            }
+                                        },
+                                    )
+                                    if (tooltipState.value) {
+                                        RichTooltip(
+                                            modifier = Modifier.fillMaxSize()
+                                        ) {
+                                            DisableSelection {
+                                                Surface(
+                                                    shape = MaterialTheme.shapes.medium,
+                                                    color = MaterialTheme.colorScheme.primaryContainer
+                                                ) {
+                                                    Column(modifier = Modifier.padding(8.dp)) {
+                                                        Text(
+                                                            item.ins.instruction.sig,
+                                                            style = codeStyle
+                                                        )
+                                                        if (item.ins.instruction.properties != null) {
+                                                            Text(
+                                                                "prop:${item.ins.instruction.properties}",
+                                                                fontSize = MaterialTheme.typography.bodyMedium.fontSize
+                                                            )
+                                                        }
+                                                        Text(
+                                                            "组:${item.ins.group.title}",
+                                                            fontSize = MaterialTheme.typography.bodyMedium.fontSize
+                                                        )
+                                                        Text(
+                                                            "组描述:${item.ins.group.description.trim()}",
+                                                            fontSize = MaterialTheme.typography.bodyMedium.fontSize
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    Text(
+                                        text = asmString[item]!!,
+                                        style = codeStyle,
+                                        modifier = Modifier.fillMaxWidth()
+                                    )
+                                    Text("\n", maxLines = 1, style = codeStyle)
                                 }
                             }
                             item {
                                 Spacer(Modifier.height(120.dp))
                             }
-//                            }
                         }
                         val clipboardManager = LocalClipboardManager.current
                         FloatingActionButton(

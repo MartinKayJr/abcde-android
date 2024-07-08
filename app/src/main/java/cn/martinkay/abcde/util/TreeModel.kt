@@ -1,4 +1,4 @@
-package me.yricky.abcde.util
+package cn.martinkay.abcde.util
 
 import me.yricky.oh.common.TreeStruct
 

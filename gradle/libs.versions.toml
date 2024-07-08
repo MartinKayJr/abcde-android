@@ -45,7 +45,7 @@ androidx-compose-foundation-desktop = { group = "androidx.compose.foundation", n
 
 abcde-core = { group = "io.github.yricky.oh", name = "abcde-jvm", version = "0.1.0-dev-0ca25f1" }
 google-accompanist = { group = "com.google.accompanist", name = "accompanist-permissions", version = "0.35.1-alpha" }
-
+lazy-column-scrollbar = { group = "com.github.nanihadesuka", name = "LazyColumnScrollbar", version = "2.2.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

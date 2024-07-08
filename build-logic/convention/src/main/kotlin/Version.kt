@@ -7,7 +7,7 @@ import java.util.Locale
 import java.util.Properties
 
 object Version {
-    val java = JavaVersion.VERSION_17
+    val java = JavaVersion.VERSION_11
 
     const val compileSdkVersion = 34
     val buildToolsVersion = findBuildToolsVersion()

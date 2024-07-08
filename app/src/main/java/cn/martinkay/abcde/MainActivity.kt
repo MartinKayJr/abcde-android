@@ -63,7 +63,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cn.martinkay.abcde.bean.menu.MenuGroup
 import cn.martinkay.abcde.bean.menu.MenuItem
-import cn.martinkay.abcde.page.ClassListPage
+import cn.martinkay.abcde.page.AbcOverviewPage
 import cn.martinkay.abcde.page.ClassViewPage
 import cn.martinkay.abcde.page.CodeViewPage
 import cn.martinkay.abcde.page.WelcomePage
@@ -303,7 +303,7 @@ fun ContentUI() {
                     Image(
                         painter = if (!hover) {
                             when (p) {
-                                is AppState.ClassList -> Icons.listFiles()
+                                is AppState.AbcOverview -> Icons.listFiles()
                                 is AppState.ClassView -> p.classItem.icon()
                                 is AppState.CodeView -> p.method.icon()
                             }
@@ -351,7 +351,7 @@ fun ContentUI() {
                     }
                 }
 
-                is AppState.ClassList -> ClassListPage(
+                is AppState.AbcOverview -> AbcOverviewPage(
                     Modifier
                         .fillMaxWidth()
                         .weight(1f)

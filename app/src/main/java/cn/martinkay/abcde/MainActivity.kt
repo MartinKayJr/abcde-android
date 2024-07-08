@@ -272,7 +272,7 @@ fun ContentUI() {
                 Row(
                     Modifier
                         .padding(start = 4.dp)
-                        .height(28.dp)
+                        .height(32.dp)
                         .clip(RoundedCornerShape(14.dp))
                         .pointerInput(PointerEventPass.Main) {
                             awaitPointerEventScope {

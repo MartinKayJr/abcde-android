@@ -20,6 +20,9 @@ import me.yricky.oh.abcd.cfm.AbcClass
 import me.yricky.oh.abcd.cfm.AbcField
 import me.yricky.oh.abcd.cfm.AbcMethod
 import me.yricky.oh.abcd.cfm.ClassItem
+import me.yricky.oh.abcd.cfm.MethodItem
+import me.yricky.oh.abcd.cfm.getIntValue
+import me.yricky.oh.abcd.cfm.isModuleRecordIdx
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -272,6 +275,14 @@ fun AbcMethod.icon(): Painter {
 }
 
 object Icons {
+
+    @Composable
+    fun enum()= if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_enum_dark)
+    } else {
+        painterResource(R.drawable.ic_enum)
+    }
+
     @Composable
     fun listFiles() = if (isSystemInDarkTheme()) {
         painterResource(R.drawable.ic_list_files_dark)
@@ -333,6 +344,20 @@ object Icons {
         painterResource(R.drawable.ic_home_folder_dark)
     } else {
         painterResource(R.drawable.ic_home_folder)
+    }
+
+    @Composable
+    fun watch()= if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_watch_dark)
+    } else {
+        painterResource(R.drawable.ic_watch)
+    }
+
+    @Composable
+    fun asm() = if (isSystemInDarkTheme()) {
+        painterResource(R.drawable.ic_asm_dark)
+    } else {
+        painterResource(R.drawable.ic_asm)
     }
 }
 
@@ -400,3 +425,78 @@ fun AbcdeTheme(
 val grayColorFilter = ColorFilter.colorMatrix(ColorMatrix().apply {
     setToSaturation(0f)
 })
+
+
+fun AbcField.defineStr():String = run {
+    val sb = StringBuilder()
+    if(accessFlags.isPublic){
+        sb.append("public ")
+    }
+    if(accessFlags.isPrivate){
+        sb.append("private ")
+    }
+    if(accessFlags.isProtected){
+        sb.append("protected ")
+    }
+    if(accessFlags.isStatic){
+        sb.append("static ")
+    }
+    if(accessFlags.isFinal){
+        sb.append("final ")
+    }
+    if(accessFlags.isVolatile){
+        sb.append("volatile ")
+    }
+
+    sb.append("${type.name} $name")
+    if(isModuleRecordIdx()){
+        val moduleRecordOffset = getIntValue()
+        sb.append("= 0x${moduleRecordOffset?.toString(16)}")
+    }
+    sb.toString()
+}
+
+fun MethodItem.defineStr(showClass:Boolean = false):String = run {
+    val sb = StringBuilder()
+//    if(indexData.isPublic){
+//        sb.append("public ")
+//    }
+//    if(indexData.isPrivate){
+//        sb.append("private ")
+//    }
+//    if(indexData.isProtected){
+//        sb.append("protected ")
+//    }
+//    if(indexData.isStatic){
+//        sb.append("static ")
+//    }
+//    if(indexData.isAbstract){
+//        sb.append("abstract ")
+//    }
+//    if(indexData.isFinal){
+//        sb.append("final ")
+//    }
+//    if(accessFlags.isNative){
+//        sb.append("native ")
+//    }
+//    if(indexData.isSynchronized){
+//        sb.append("synchronized ")
+//    }
+//    sb.append("${proto?.shortyReturn ?: ""} ")
+    if(showClass){
+        sb.append("${clazz.name}.")
+    }
+    sb.append(name)
+    if(this is AbcMethod && codeItem != null){
+        val code = codeItem!!
+        val argCount = code.numArgs - 3
+        if(argCount >= 0){
+            sb.append("(FunctionObject, NewTarget, this")
+            repeat(argCount){
+                sb.append(", arg$it")
+            }
+            sb.append(')')
+        }
+    }
+    sb.toString()
+}

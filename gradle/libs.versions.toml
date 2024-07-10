@@ -46,6 +46,9 @@ androidx-compose-foundation-desktop = { group = "androidx.compose.foundation", n
 abcde-core = { group = "io.github.yricky.oh", name = "abcde-jvm", version = "0.1.0-dev-0ca25f1" }
 google-accompanist = { group = "com.google.accompanist", name = "accompanist-permissions", version = "0.35.1-alpha" }
 lazy-column-scrollbar = { group = "com.github.nanihadesuka", name = "LazyColumnScrollbar", version = "2.2.0" }
+preference-library = { group = "me.zhanghai.compose.preference", name = "library", version = "1.0.0" }
+sora-editor-bom = { group = "io.github.Rosemoe.sora-editor", name = "bom", version = "0.23.4" }
+sora-editor = { group = "io.github.Rosemoe.sora-editor", name = "editor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

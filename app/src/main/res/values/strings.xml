@@ -6,4 +6,11 @@
     <string name="three">ccc\n</string>
     <string name="me">我</string>
     <string name="title_activity_permission">PermissionActivity</string>
+    <string name="about_email">开发者邮箱</string>
+    <string name="nav_header_subtitle">MartinKay@qq.com</string>
+    <string name="version">版本代码</string>
+    <string name="version_code">1.0</string>
+    <string name="website">官方网站</string>
+    <string name="website_rul">http://www.cloudspie.cn</string>
+
 </resources>

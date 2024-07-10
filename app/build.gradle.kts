@@ -90,9 +90,9 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.lazy.column.scrollbar)
-//    implementation(libs.androidx.compose.foundation)
-//    implementation(libs.androidx.compose.foundation.layout)
-//    implementation(libs.androidx.compose.foundation.desktop)
+    implementation(libs.preference.library)
+    implementation(platform(libs.sora.editor.bom))
+    implementation(libs.sora.editor)
 
     implementation(libs.google.accompanist)
     implementation(libs.abcde.core)

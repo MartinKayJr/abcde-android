@@ -1,14 +1,10 @@
 package cn.martinkay.abcde.ui.screen
 
-import androidx.compose.animation.core.animate
-import androidx.compose.animation.core.animateIntOffsetAsState
-import androidx.compose.animation.slideIn
-import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -30,19 +26,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import cn.martinkay.abcde.DrawerBody
 import cn.martinkay.abcde.DrawerHeader
@@ -52,7 +41,6 @@ import cn.martinkay.abcde.bean.menu.MenuItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import me.zhanghai.compose.preference.ProvidePreferenceTheme
-import kotlin.math.roundToInt
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -79,6 +67,8 @@ fun ScreenContainer(
 
         ModalNavigationDrawer(
             drawerState = drawerState,
+            // 仅在抽屉打开时允许手势开关抽屉，防止手势冲突
+            gesturesEnabled = drawerState.isOpen,
             drawerContent = {
                 ModalDrawerSheet {
                     DrawerHeader()
@@ -136,31 +126,6 @@ fun ScreenContainer(
                 }
             },
         ) {
-//            var moved by remember { mutableStateOf(false) }
-//            val pxToMove = with(LocalDensity.current) {
-////                val offset = drawerState.currentOffset * 0.2f
-//                100.dp.toPx().roundToInt()
-//            }
-//            val offset by animateIntOffsetAsState(
-//                targetValue = if (moved) {
-//                    IntOffset(pxToMove, 0)
-//                } else {
-//                    IntOffset.Zero
-//                },
-//                label = "offset"
-//            )
-//            // 监听抽屉状态变化
-//            // 每当Drawer的状态发生变化时，这个LaunchedEffect都会被触发
-//            LaunchedEffect(drawerState) {
-//                snapshotFlow { drawerState.currentValue }
-//                    .collect { value ->
-//                        if (value == DrawerValue.Closed) {
-//                            moved = false
-//                        } else if (value == DrawerValue.Open) {
-//                            moved = true
-//                        }
-//                    }
-//            }
 
             Scaffold(
                 topBar = {

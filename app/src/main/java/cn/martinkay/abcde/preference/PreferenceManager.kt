@@ -36,4 +36,9 @@ object PreferenceManager {
         defaultValue = PreferenceKey.EditorFontSize.defaultValue
     ).toString().toFloat()
 
+    @Composable
+    fun getCodeEditorChoose() = PreferenceKey.CodeEditorChoose.keyName.getPreferenceValue(
+        defaultValue = PreferenceKey.CodeEditorChoose.defaultValue
+    ) as String
+
 }

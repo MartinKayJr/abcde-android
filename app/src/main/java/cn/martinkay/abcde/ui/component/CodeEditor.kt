@@ -1,5 +1,6 @@
 package cn.martinkay.abcde.ui.component
 
+import android.view.MotionEvent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -24,7 +25,9 @@ fun CodeEditor(
             }
     }
     AndroidView(
-        factory = { editor },
+        factory = {
+            editor
+        },
         modifier = modifier.fillMaxSize(),
         onRelease = { it.release() }
     )

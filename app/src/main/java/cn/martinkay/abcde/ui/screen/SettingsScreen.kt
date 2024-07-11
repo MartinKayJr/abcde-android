@@ -71,4 +71,10 @@ fun LazyListScope.EditorSettings() {
         summary = { Text(text = it.toString()) },
         textToValue = { it }
     )
+    listPreference(
+        key = PreferenceKey.CodeEditorChoose.keyName,
+        defaultValue = PreferenceKey.CodeEditorChoose.defaultValue,
+        values = listOf("sora", "default"),
+        title = { Text(text = "Code editor choose") }
+    )
 }

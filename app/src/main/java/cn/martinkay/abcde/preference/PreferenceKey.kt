@@ -16,6 +16,9 @@ enum class PreferenceKey(
     AppDynamicColor(keyName = "pref_app_dynamic_color_enabled", defaultValue = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S),
 
     // Editor
-    EditorFontSize(keyName = "pref_editor_font_size", defaultValue = CodeEditor.DEFAULT_TEXT_SIZE.toFloat())
+    EditorFontSize(keyName = "pref_editor_font_size", defaultValue = CodeEditor.DEFAULT_TEXT_SIZE.toFloat()),
+
+    // Code Editor Choose
+    CodeEditorChoose(keyName = "pref_code_editor_choose", defaultValue = "sora")
 
 }

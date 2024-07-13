@@ -1,0 +1,213 @@
+{
+  "information_for_contributors": [
+    "abcde-android"
+  ],
+  "version": "1.0",
+  "name": "Abc",
+  "scopeName": "source.abc",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#register"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "captures": {
+            "0": {
+              "name": "punctuation.definition.comment.abc"
+            }
+          },
+          "match": "/\\*\\*/",
+          "name": "comment.block.empty.abc"
+        },
+        {
+          "include": "#comments-inline"
+        }
+      ]
+    },
+    "comments-inline": {
+      "patterns": [
+        {
+          "begin": "/\\*",
+          "captures": {
+            "0": {
+              "name": "punctuation.definition.comment.abc"
+            }
+          },
+          "end": "\\*/",
+          "name": "comment.block.abc"
+        },
+        {
+          "begin": "(^[ \\t]+)?(?=//)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.abc"
+            }
+          },
+          "end": "(?!\\G)",
+          "patterns": [
+            {
+              "begin": "//",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.comment.abc"
+                }
+              },
+              "end": "\\n",
+              "name": "comment.line.double-slash.abc"
+            }
+          ]
+        }
+      ]
+    },
+    "register": {
+      "patterns": [
+        {
+          "match": "\\b(v[0-9]+)\\b",
+          "name": "constant.language.abc"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "match": "\\b(ldnan|ldinfinity|ldundefined|ldnull|ldsymbol|ldglobal|ldtrue|ldfalse|ldhole|deprecated\\.ldlexenv|ldnewtarget|ldthis|poplexenv|deprecated\\.poplexenv|getunmappedargs|asyncfunctionenter|ldfunction|debugger)\\b",
+          "name": "keyword.constant.object.loaders.abc"
+        },
+        {
+          "match": "\\b(getpropiterator|getiterator|closeiterator|deprecated\\.getiteratornext|getasynciterator|ldprivateproperty|stprivateproperty|testin|definefieldbyname|definepropertybyname)\\b",
+          "name": "keyword.iterator.instructions.abc"
+        },
+        {
+          "match": "\\b(createemptyobject|createemptyarray|creategeneratorobj|createiterresultobj|createobjectwithexcludedkeys|wide\\.createobjectwithexcludedkeys|createarraywithbuffer|deprecated\\.createarraywithbuffer|createobjectwithbuffer|deprecated\\.createobjectwithbuffer|createregexpwithliteral|newobjapply|newobjrange|wide\\.newobjrange|newlexenv|wide\\.newlexenv|newlexenvwithname|wide\\.newlexenvwithname|createasyncgeneratorobj|asyncgeneratorresolve)\\b",
+          "name": "keyword.object.creaters.abc"
+        },
+        {
+          "match": "\\b(add2|sub2|mul2|div2|mod2|eq|noteq|less|lesseq|greater|greatereq|shl2|shr2|ashr2|and2|or2|xor2|exp)\\b",
+          "name": "keyword.binary.operations.abc"
+        },
+        {
+          "match": "\\b(typeof|tonumber|deprecated\\.tonumber|tonumeric|deprecated\\.tonumeric|neg|deprecated\\.neg|not|deprecated\\.not|inc|deprecated\\.inc|dec|deprecated\\.dec|istrue|isfalse)\\b",
+          "name": "keyword.unary.operations.abc"
+        },
+        {
+          "match": "\\b(isin|instanceof|strictnoteq|stricteq)\\b",
+          "name": "keyword.comparation.instructions.abc"
+        },
+        {
+          "match": "\\b(callruntime\\.notifyconcurrentresult|callruntime\\.definefieldbyvalue|callruntime\\.definefieldbyindex|callruntime\\.topropertykey|callruntime\\.createprivateproperty|callruntime\\.defineprivateproperty|callruntime\\.callinit|callruntime\\.definesendableclass|callruntime\\.ldsendableclass|callruntime\\.ldsendableexternalmodulevar|callruntime\\.wideldsendableexternalmodulevar|callruntime\\.newsendableenv|callruntime\\.widenewsendableenv|callruntime\\.stsendablevar|callruntime\\.widestsendablevar|callruntime\\.ldsendablevar|callruntime\\.wideldsendablevar|callruntime\\.istrue|callruntime\\.isfalse)\\b",
+          "name": "keyword.call.runtime.functions.abc"
+        },
+        {
+          "match": "\\b(throw\\.notexists|throw\\.patternnoncoercible|throw\\.deletesuperproperty|throw\\.constassignment|throw\\.ifnotobject|throw\\.undefinedifhole|throw\\.ifsupernotcorrectcall|throw\\.undefinedifholewithname|throw)\\b",
+          "name": "keyword.call.throw.instructions.abc"
+        },
+        {
+          "match": "\\b(callarg0|deprecated\\.callarg0|callarg1|deprecated\\.callarg1|callargs2|deprecated\\.callargs2|callargs3|deprecated\\.callargs3|callrange|wide\\.callrange|deprecated\\.callrange|supercallspread|apply|deprecated\\.callspread|callthis0|callthis1|callthis2|callthis3|callthisrange|wide\\.callthisrange|deprecated\\.callthisrange|supercallthisrange|wide\\.supercallthisrange|supercallarrowrange|wide\\.supercallarrowrange)\\b",
+          "name": "keyword.call.instructions.abc"
+        },
+        {
+          "match": "\\b(definegettersetterbyvalue|definefunc|definemethod|defineclasswithbuffer|deprecated\\.defineclasswithbuffer)\\b",
+          "name": "keyword.define.instructions.abc"
+        },
+        {
+          "match": "\\b(resumegenerator|deprecated\\.resumegenerator|getresumemode|deprecated\\.getresumemode|gettemplateobject|deprecated\\.gettemplateobject|getnextpropname|delobjprop|deprecated\\.delobjprop|suspendgenerator|deprecated\\.suspendgenerator|asyncfunctionawaituncaught|deprecated\\.asyncfunctionawaituncaught|copydataproperties|deprecated\\.copydataproperties|starrayspread|setobjectwithproto|deprecated\\.setobjectwithproto|ldobjbyvalue|deprecated\\.ldobjbyvalue|stobjbyvalue|stownbyvalue|ldsuperbyvalue|deprecated\\.ldsuperbyvalue|stsuperbyvalue|ldobjbyindex|wide\\.ldobjbyindex|deprecated\\.ldobjbyindex|stobjbyindex|wide\\.stobjbyindex|stownbyindex|wide\\.stownbyindex|asyncfunctionresolve|deprecated\\.asyncfunctionresolve|asyncfunctionreject|deprecated\\.asyncfunctionreject|copyrestargs|wide\\.copyrestargs|ldlexvar|wide\\.ldlexvar|stlexvar|wide\\.stlexvar|deprecated\\.stlexvar|getmodulenamespace|wide\\.getmodulenamespace|deprecated\\.getmodulenamespace|stmodulevar|wide\\.stmodulevar|deprecated\\.stmodulevar|tryldglobalbyname|trystglobalbyname|ldglobalvar|stglobalvar|ldobjbyname|deprecated\\.ldobjbyname|stobjbyname|stownbyname|ldsuperbyname|deprecated\\.ldsuperbyname|stsuperbyname|ldlocalmodulevar|wide\\.ldlocalmodulevar|ldexternalmodulevar|wide\\.ldexternalmodulevar|deprecated\\.ldmodulevar|stconsttoglobalrecord|deprecated\\.stconsttoglobalrecord|sttoglobalrecord|deprecated\\.stlettoglobalrecord|deprecated\\.stclasstoglobalrecord|deprecated\\.ldhomeobject|deprecated\\.createobjecthavingmethod|stownbyvaluewithnameset|stownbynamewithnameset|ldbigint|ldthisbyname|stthisbyname|ldthisbyvalue|stthisbyvalue|wide\\.ldpatchvar|wide\\.stpatchvar|dynamicimport|deprecated\\.dynamicimport|asyncgeneratorreject|deprecated\\.asyncgeneratorreject|setgeneratorstate)\\b",
+          "name": "keyword.object.visitors.abc"
+        },
+        {
+          "match": "\\b(lda\\.str)\\b",
+          "name": "keyword.load.stringid.abc"
+        },
+        {
+          "match": "\\b(jmp|jeqz|jnez|jstricteqz|jnstricteqz|jeqnull|jnenull|jstricteqnull|jnstricteqnull|jequndefined|jneundefined|jstrictequndefined|jnstrictequndefined|jeq|jne|jstricteq|jnstricteq)\\b",
+          "name": "keyword.jump.operations.abc"
+        },
+        {
+          "match": "\\b(mov)\\b",
+          "name": "keyword.move.operations.abc"
+        },
+        {
+          "match": "\\b(lda)\\b",
+          "name": "keyword.load.operations.abc"
+        },
+        {
+          "match": "\\b(sta)\\b",
+          "name": "keyword.store.operations.abc"
+        },
+        {
+          "match": "\\b(ldai|fldai)\\b",
+          "name": "keyword.load.immediate.operations.abc"
+        },
+        {
+          "match": "\\b(return|returnundefined)\\b",
+          "name": "keyword.return.operations.abc"
+        },
+        {
+          "match": "\\b(nop)\\b",
+          "name": "keyword.no.operation.abc"
+        },
+        {
+          "match": "\\b(import|as)\\b",
+          "name": "keyword.other.abc"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "begin": "\"",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.abc"
+            }
+          },
+          "end": "\"",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.abc"
+            }
+          },
+          "name": "string.quoted.double.abc",
+          "patterns": [
+            {
+              "match": "\\\\.",
+              "name": "constant.character.escape.abc"
+            }
+          ]
+        },
+        {
+          "begin": "'",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.abc"
+            }
+          },
+          "end": "'",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.abc"
+            }
+          },
+          "name": "string.quoted.single.abc",
+          "patterns": [
+            {
+              "match": "\\\\.",
+              "name": "constant.character.escape.abc"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

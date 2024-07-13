@@ -49,6 +49,9 @@ lazy-column-scrollbar = { group = "com.github.nanihadesuka", name = "LazyColumnS
 preference-library = { group = "me.zhanghai.compose.preference", name = "library", version = "1.0.0" }
 sora-editor-bom = { group = "io.github.Rosemoe.sora-editor", name = "bom", version = "0.23.4" }
 sora-editor = { group = "io.github.Rosemoe.sora-editor", name = "editor" }
+sora-languagetextmate = { group = "io.github.Rosemoe.sora-editor", name = "language-textmate" }
+desugar-jdk = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.4" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

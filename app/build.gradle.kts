@@ -58,6 +58,7 @@ android {
     compileOptions {
         sourceCompatibility = Version.java
         targetCompatibility = Version.java
+        isCoreLibraryDesugaringEnabled = true
     }
 
     buildFeatures {
@@ -76,6 +77,7 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(libs.desugar.jdk)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -93,6 +95,7 @@ dependencies {
     implementation(libs.preference.library)
     implementation(platform(libs.sora.editor.bom))
     implementation(libs.sora.editor)
+    implementation(libs.sora.languagetextmate)
 
     implementation(libs.google.accompanist)
     implementation(libs.abcde.core)

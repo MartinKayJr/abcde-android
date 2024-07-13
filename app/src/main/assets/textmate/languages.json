@@ -1,0 +1,10 @@
+{
+  "languages": [
+    {
+      "grammar": "textmate/abc/syntaxes/abc.tmLanguage.json",
+      "name": "abc",
+      "scopeName": "source.abc",
+      "languageConfiguration": "textmate/abc/language-configuration.json"
+    }
+  ]
+}

@@ -71,6 +71,8 @@ import cn.martinkay.abcde.preference.PreferenceManager
 import cn.martinkay.abcde.ui.theme.AbcdeTheme
 import cn.martinkay.abcde.ui.theme.Icons
 import cn.martinkay.abcde.ui.theme.icon
+import io.github.rosemoe.sora.langs.textmate.registry.FileProviderRegistry
+import io.github.rosemoe.sora.langs.textmate.registry.provider.AssetsFileResolver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import me.zhanghai.compose.preference.ProvidePreferenceLocals
@@ -79,12 +81,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        FileProviderRegistry.getInstance().addFileProvider(
+            AssetsFileResolver(
+                applicationContext.assets // 使用应用上下文
+            )
+        )
         setContent {
             ProvidePreferenceLocals {
                 AbcdeTheme(
                     darkTheme = PreferenceManager.getThemeMode(),
                     dynamicColor = PreferenceManager.isDynamicColorEnabled()
                 ) {
+
                     App()
                 }
             }
